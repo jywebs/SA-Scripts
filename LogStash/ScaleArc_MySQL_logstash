@@ -1,0 +1,23 @@
+input {
+  file {
+    path => [ "/logs/*/*/idb.log.*", "/currentlogs/*/*/idb.log.*" ]
+    start_position => "beginning"
+    exclude => "*.sqlite"
+    type => "idblog"
+  }
+}
+filter {
+  mutate {
+    gsub => [ "message", "#!#", " " ]
+  }
+  grok {
+    match => { "message" => "%{DATESTAMP:time}  %{BASE10NUM:logtype} %{BASE10NUM:cid} %{IPV4:clientip} %{USER:username} %{WORD:database} %{NUMBER:cache} %{IPV4:serverip} %{NUMBER:pattern} %{NUMBER:rule} %{NUMBER:error} %{NUMBER:TimeTaken} %{NUMBER:TTFB} %{GREEDYDATA:Query} %{GREEDYDATA:QuerErrMSG} %{NUMBER:SSID} %{NUMBER:RespSizeinB} %{NUMBER:ComRespSize} %{INT:InTrans} %{INT:QTrim} %{NUMBER:QSize} %{NUMBER:QType} %{NUMBER:IsSP} %{NUMBER:NumRows} %{NUMBER:ServerSSID} %{NUMBER:TransID} %{NUMBER:ShardID} %{NUMBER:RouteQID} %{NUMBER:TTComQ} %{NUMBER:TTQueue} %{NUMBER:TTWriteF} %{NUMBER:TTWrite} %{NUMBER:TTFResp} %{NUMBER:TTResp} %{NUMBER:TTComWRSetMulQry} %{NUMBER:TTFWRSetQry} %{NUMBER:TTComWRSetWry} %{NUMBER:TTCOMSetRespRead} %{NUMBER:TTCOMSetMulRespRead} %{NUMBER:TTRespWriteFirst} %{NUMBER:TTRespWriteLast} %{NUMBER:TTRespWriteLast1} %{NUMBER:TTRespWriteLast2} %{NUMBER:TTRestLast11} %{NUMBER:TTRespWriteLast3} %{NUMBER:TTConnection} %{NUMBER:CMDNumber}" }
+  }
+}
+output {
+  elasticsearch {
+    hosts => ["172.20.1.26:9200"]
+    manage_template => false
+    index => "idblog-%{+YYYY-MM-DD}"
+  }
+}

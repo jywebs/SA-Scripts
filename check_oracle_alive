@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+$tnsname = $ARGV[0];
+$uid = $ARGV[1];
+$pwd  = $ARGV[2];
+
+my %STATUSCODE = (  'OK'       => '0',
+                    'WARNING'  => '1',
+                    'CRITICAL' => '2',
+                    'UNKNOWN'  => '3');

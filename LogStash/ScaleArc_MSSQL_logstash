@@ -1,0 +1,23 @@
+input {
+  file {
+    path => [ "/logs/*/*/idb.log.*", "/currentlogs/*/*/idb.log.*" ]
+    start_position => "beginning"
+    exclude => "*.sqlite"
+    type => "idblog"
+  }
+}
+filter {
+  mutate {
+    gsub => [ "message", "#!#", " " ]
+  }
+  grok {
+    match => { "message" => "%{DATESTAMP:time}  %{BASE10NUM:logtype} %{BASE10NUM:cid} %{IPV4:clientip} %{USER:username} %{WORD:database} %{BASE10NUM:cache} %{IPV4:serverip} %{BASE10NUM:pattern} %{BASE10NUM:rule} %{BASE10NUM:error} %{BASE10NUM:TimeTaken} %{BASE10NUM:TTFB} %{GREEDYDATA:Query} %{GREEDYDATA:QuerErrMSG} %{BASE10NUM:SSID} %{BASE10NUM:RespSizeinB} %{BASE10NUM:ComRespSize} %{INT:InTrans} %{INT:QTrim} %{BASE10NUM:QSize} %{BASE10NUM:QType} %{BASE10NUM:IsSP} %{BASE10NUM:NumRows} %{BASE10NUM:ServerSSID} %{BASE10NUM:TransID} %{BASE10NUM:ShardID} %{BASE10NUM:RouteQID}" }
+  }
+}
+output {
+  elasticsearch {
+    hosts => ["172.20.1.26:9200"]
+    manage_template => false
+    index => "idblog-%{+YYYY-MM-DD}"
+  }
+}

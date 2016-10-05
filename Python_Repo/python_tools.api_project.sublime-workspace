@@ -1,0 +1,638 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"el",
+				"elif	elif …"
+			],
+			[
+				"none",
+				"none"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"apikey",
+				"apikey"
+			],
+			[
+				"url",
+				"urllib2"
+			],
+			[
+				"password",
+				"password"
+			],
+			[
+				"clus",
+				"cluster_name"
+			],
+			[
+				"clu",
+				"cluster_status"
+			],
+			[
+				"clust",
+				"cluster_id"
+			],
+			[
+				"cluster",
+				"cluster_name"
+			],
+			[
+				"g",
+				"google-authenticator"
+			],
+			[
+				"fw",
+				"fwrules"
+			],
+			[
+				"buil",
+				"buildsync"
+			],
+			[
+				"all",
+				"all_builds"
+			],
+			[
+				"Build",
+				"buildsync"
+			],
+			[
+				"rsyn",
+				"rsyncdata"
+			],
+			[
+				"vpn",
+				"vpnsetup"
+			],
+			[
+				"DATE",
+				"_DATE_"
+			],
+			[
+				"M",
+				"M"
+			],
+			[
+				"I",
+				"IS_PRI"
+			],
+			[
+				"_",
+				"_DBDATE_"
+			],
+			[
+				"s",
+				"s"
+			],
+			[
+				"event",
+				"Events"
+			],
+			[
+				"str",
+				"strb"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "#!/bin/bash\n\nDATE=$(date +%d%B%y) \nXSNAME=`echo $HOSTNAME` \nmkdir -p /mnt/nfsshare\n\nmount -t nfs 172.31.10.240:/mnt/scalhq_primary/it_backup/it_backup /mnt/nfsshare\n\nBACKUPPATH=/mnt/nfsshare/$XSNAME/$DATE \nmkdir -p $BACKUPPATH\n\nxe vm-list is-control-domain=false is-a-snapshot=false | grep uuid | cut -d\":\" -f2 > /tmp/uuids.txt\n\nwhile read line \ndo \nVMNAME=`xe vm-list uuid=$line | grep name-label | cut -d\":\" -f2 | sed 's/^ *//g'` \nxe vm-export filename=\"$BACKUPPATH/$XSNAME-$VMNAME-$DATE.xbk\" uuid=$line metadata=true \ndone < /tmp/uuids.txt\n\numount /mnt/nfsshare\n\nfind /ftpdata/* -type f -mtime +60 -exec rm {} \\;\n\n\nmount -t nfs 172.20.10.54:/mnt/faststore1/xenbuild2_backup/XenbuildBackup /mnt/nfsshare",
+			"settings":
+			{
+				"buffer_size": 705,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/root/migratevm-1.0.1/migratevm -sh 172.20.10.40 -su root -sp q1w2e3r4 -sv 61e0b2c9-4104-f09f-a306-3fe679359d81 -dh 172.20.10.25 -du root -dp q1w2e3r4 -ds 3a91d259-5845-687d-7abe-1ae855231573\n",
+			"settings":
+			{
+				"buffer_size": 192,
+				"line_ending": "Unix",
+				"name": "/root/migratevm-1.0.1/migratevm -sh 172.20.10.40 -"
+			}
+		},
+		{
+			"file": "/Users/jacyyork/Documents/ScaleArc/scripts/Salesforce_Cleanup.py",
+			"settings":
+			{
+				"buffer_size": 1876,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jacyyork/Documents/Salesforce_Cleanup.py",
+			"settings":
+			{
+				"buffer_size": 2168,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Change on HQ \nR        10.10.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.11.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.12.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.13.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.14.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.15.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.16.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.17.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.18.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.19.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.20.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.21.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:08, ANAP\nR        10.22.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.23.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.24.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.25.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.26.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.27.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        10.30.0.0 255.255.0.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        172.31.1.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        172.31.5.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:14, ANAP\nR        172.31.10.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.15.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.20.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.21.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.22.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.23.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.25.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\nR        172.31.30.0 255.255.255.0 [120/1] via 192.0.2.33, 00:00:28, ANAP\n\n\nChange on COLO\nS        172.20.1.0 255.255.255.0 [1/0] via 192.0.2.1, ANAP\nS        172.20.5.0 255.255.255.0 [1/0] via 192.0.2.1, ANAP\nS        172.20.8.0 255.255.255.0 [1/0] via 192.0.2.1, ANAP\nS        172.20.9.0 255.255.255.0 [1/0] via 192.0.2.1, ANAP\nS        172.20.10.0 255.255.255.0 [1/0] via 192.0.2.1, ANAP\n",
+			"settings":
+			{
+				"buffer_size": 2400,
+				"line_ending": "Unix",
+				"name": "Change on HQ"
+			}
+		},
+		{
+			"contents": "Santosh to add Nagios for all WCDEMO Servers\nJag to add Active DataGaurd\n\n#rsync ISO files\nfor i in `find /mnt/base_repo -type f -name \"*.iso\" | grep 'scalearc-3.'`; do rsync -vh --size-only $i /mnt/iso_repo/; done &\n#Rsync all_builds\nrsync -rv --include=*/ --include=*pkg --include=md5 --prune-empty-dirs --exclude=3.3* --exclude=3.4* --exclude=*.rpm --exclude=3.5* --exclude=3_1_Update1 --exclude=*ova* --exclude=*ova --exclude=3_1_Update1 --exclude=3.6-* --exclude=3.5* /mnt/all_builds_colo/ /mnt/all_builds_hq/",
+			"settings":
+			{
+				"buffer_size": 514,
+				"line_ending": "Unix",
+				"name": "Santosh to add Nagios for all WCDEMO Servers"
+			}
+		},
+		{
+			"contents": "filter {\n    ... other filters ...\n    grok {\n        patterns_dir => \"/etc/logstash/patterns\"\n        match => [ \"message\", \"%{IDBLOG}\" ]\n    }\n}",
+			"file": "/Users/jacyyork/Documents/ScaleArc/scripts/LogStash/20-idblog-filter.conf",
+			"file_size": 233,
+			"file_write_time": 1466112723000000,
+			"settings":
+			{
+				"buffer_size": 146,
+				"line_ending": "Unix",
+				"name": "# The # character at the beginning of a line indic"
+			}
+		},
+		{
+			"file": "/Users/jacyyork/Documents/ScaleArc/scripts/Logstash_idblog.conf",
+			"settings":
+			{
+				"buffer_size": 1352,
+				"line_ending": "Unix",
+				"name": "input {"
+			}
+		},
+		{
+			"contents": "#cleanup Archieved Records\n#clean_sf_archtask.py\nimport SQLForce\n\nsession = SQLForce.Session('Production', 'jacy.york@scalearc.com', 'Bear0817urTD1zfLaz1Y3y9NM2SAYhyR' )\nsession.setenv('QUERY_ALL', \"true\" ) # Force archived records to be read.\n\n##\n## SOQL that determines what records to delete. BE VERY CAREFUL HERE!\n##s\ntaskSOQL = \"\"\"SELECT id FROM Task WHERE isDeleted=false AND IsArchived = true order by systemmodstamp DESC\"\"\"\n\nnDeleted = 0\nmaxPerBatch = 1000 # This is a good size to prevent the Task query from timing out.\nmaxPerRun = 50000   # quit once this number of deletes has happened.\n\nwhile True:\n    idsToDelete = []\n    soql = taskSOQL + \" LIMIT \" + str(maxPerBatch)\n    print(soql)\n    for rec in session.selectRecords(soql):\n        idsToDelete.append( rec.id )\n\n    if not idsToDelete:\n        break\n    \n\n    nThisTime = session.delete('Task', idsToDelete )\n \n    nDeleted += nThisTime\n    print(\"Deleted \" + str(nDeleted) + \" records so far\")\n    if nDeleted >= maxPerRun:\n        break\n\nprint(\"Finished\")",
+			"settings":
+			{
+				"buffer_size": 1027,
+				"line_ending": "Unix",
+				"name": "#cleanup Archieved Records"
+			}
+		},
+		{
+			"contents": "SELECT t.id as \"Ticket\", t.subject as \"Subject\", concat(p.first_name,p.last_name) as \"Requester\", concat(a.first_name,a.last_name) as \"Owner\", concat(a.first_name,a.last_name) as \"Owner\", t.status as \"Status\", t.date_created as \"Date Created\", TIMEDIFF(t.date_created,date_first_agent_assign) as \"Time to Assign\", TIMEDIFF (t.date_created,t.date_first_agent_reply ) as \"Time to First Reply\", FLOOR(HOUR(TIMEDIFF(t.date_last_agent_reply, NOW())) / 24) as \"Days_Since_Last_Reply\"\nFROM tickets AS t\nJOIN people a ON t.agent_id = a.id\nJOIN people p ON t.person_id = p.id\nWHERE t.agent_team_id in (5, 27)\nAND t.status != \"archived\"\nAND status != \"resolved\"\nORDER BY Days_Since_Last_Reply DESC",
+			"settings":
+			{
+				"buffer_size": 687,
+				"line_ending": "Unix",
+				"name": "SELECT t.id as \"Ticket\", t.subject as \"Subject\", c"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/jacyyork/Documents/ScaleArc/scripts/SF_get_tasks_count.py",
+		"/Users/jacyyork/Documents/Salesforce_Cleanup.py",
+		"/Users/jacyyork/Downloads/WCDEMO1/logs/20160523/cid_2/failover.2.2016052311",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/Steps AD 2012 Setup",
+		"/Users/jacyyork/Downloads/get_sf_users.py",
+		"/Users/jacyyork/Downloads/SQLForce-5.28.1/examples/UpdateExamples.py",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/fw-emergine-updater.sh",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/elasticsearch_check.sh",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/create_user-supportconnect.sh",
+		"/Users/jacyyork/Downloads/daily_helpdesk.php",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/azure_sysprep_v1.2.sh",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/scalearc_email_alert.sh",
+		"/Users/jacyyork/Downloads/Conn_info2",
+		"/Users/jacyyork/Downloads/get_cluster_status.py",
+		"/Users/jacyyork/Downloads/enable_ssl.py",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/API_Scripts/import_db_users.py",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/import_db_users.py",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/produpdate.sh",
+		"/Users/jacyyork/Downloads/RackTables-0.20.10/README",
+		"/Users/jacyyork/Downloads/Autofailover_for_GoldenGate_Active_Active_template.php",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/check_oracle_alive",
+		"/Users/jacyyork/Downloads/check_oracle_instant.pl",
+		"/Users/jacyyork/Downloads/detect_ghost.sh",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/Python_Repo/get_apikey.py",
+		"/Users/jacyyork/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/jacyyork/Downloads/thread.py",
+		"/Users/jacyyork/Downloads/check_snmp_heartbeat.sh",
+		"/Users/jacyyork/Documents/ScaleArc/IT/Scripts/buildsync.sh",
+		"/Users/jacyyork/Documents/ScaleArc/IT/Scripts/managecurpkgsync.sh",
+		"/Users/jacyyork/Documents/ScaleArc/IT/Scripts/managesync.sh",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/azure_sysprep.sh",
+		"/Users/jacyyork/Downloads/krause_examples/IMAP_Alert_Capture.py",
+		"/Users/jacyyork/Downloads/sazze_analytics_collect.sh",
+		"/Users/jacyyork/Downloads/oltp/oltp_test/oltp_test.sh",
+		"/Users/jacyyork/Downloads/oltp/oltp_test/create_table_64.sql",
+		"/Users/jacyyork/Downloads/src/iomark/TPCCRunner/Config.java",
+		"/Users/jacyyork/Downloads/src/iomark/TPCCRunner/ConnectionPool.java",
+		"/Users/jacyyork/Documents/ScaleArc/scripts/scalearc_email_alert.sh .sh",
+		"/Users/jacyyork/Downloads/google-python-exercises/hello.py",
+		"/Users/jacyyork/Documents/ScaleArc/alert_email.py",
+		"/Users/jacyyork/Downloads/google-python-exercises/basic/string1.py",
+		"/Users/jacyyork/Downloads/create_internal_user.sh"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"eof",
+			"get_stats_from_host"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"settings":
+					{
+						"buffer_size": 705,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								618
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 192,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								192,
+								192
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/root/migratevm-1.0.1/migratevm -sh 172.20.10.40 -",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/jacyyork/Documents/ScaleArc/scripts/Salesforce_Cleanup.py",
+					"settings":
+					{
+						"buffer_size": 1876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1654,
+								1654
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/jacyyork/Documents/Salesforce_Cleanup.py",
+					"settings":
+					{
+						"buffer_size": 2168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1389,
+								1352
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 2400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2083,
+								2083
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Change on HQ",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"settings":
+					{
+						"buffer_size": 514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								235,
+								514
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Santosh to add Nagios for all WCDEMO Servers",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/jacyyork/Documents/ScaleArc/scripts/LogStash/20-idblog-filter.conf",
+					"settings":
+					{
+						"buffer_size": 146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								146,
+								146
+							]
+						],
+						"settings":
+						{
+							"auto_name": "# The # character at the beginning of a line indic",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/jacyyork/Documents/ScaleArc/scripts/Logstash_idblog.conf",
+					"settings":
+					{
+						"buffer_size": 1352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "input {",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"settings":
+					{
+						"buffer_size": 1027,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								346,
+								346
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#cleanup Archieved Records",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								651,
+								641
+							]
+						],
+						"settings":
+						{
+							"auto_name": "SELECT t.id as \"Ticket\", t.subject as \"Subject\", c",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/jacyyork/Downloads/oltp/oltp_test/oltp_test.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

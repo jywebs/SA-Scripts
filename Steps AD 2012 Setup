@@ -1,0 +1,96 @@
+OK I got it to workSteps taken
+#On the Forest root
+#Get current functional level
+Get-ADForest | format-table name, forestmode
+scalearc.net Windows2012R2Forest
+
+Set-ADForestMode -Identity "scalearc.net" -ForestMode Windows2008R2Forest
+Set-ADDomainMode -Identity "scalearc.net" -DomainMode Windows2008R2Domain
+
+#Verify
+Get-ADForest | format-table name, forestmode
+scalearc.net Windows2008R2Forest
+
+#on ADC for QA domain
+Get-ADDomain | format-table name, domainmode
+qa.scalearc.net Windows 2012R2Domain
+
+Set-ADDomainMode -Identity "qa.scalearc.net" -DomainMode Windows2008R2Domain
+
+#Verify Changes
+Get-ADDomain | format-table name, domainmode
+qa.scalearc.net Windows 2008R2Domain
+
+PS C:\Windows\system32> Get-WindowsFeature fs-smb1
+
+Display Name                                            Name                       Install State
+------------                                            ----                       -------------
+[X] SMB 1.0/CIFS File Sharing Support                   FS-SMB1                        Installed
+
+#On the ScaleArc
+#change to root since all need elevated perms
+sudo bash
+#Install required Deps
+yum install kernel-headers --disableexcludes=all -y
+
+#Install gcc, make, wget
+yum install gcc make -y
+
+#download latest Samba
+wget "https://download.samba.org/pub/samba/samba-latest.tar.gz"
+
+#install Samba update
+tar -xzvf samba-latest.tar.gz
+cd samba-4.1.16
+./configure
+make
+make install
+
+#Verify Samba 
+/usr/local/samba/sbin/smbd -V
+Version 4.1.16
+
+
+##Manual Add of domain
+##samba-tool domain join AD_DOMAIN DC -U Administrator --password=SC\!\!wi22 --realm=realm -d9
+
+Then I was able to join the domain:
+[root@scalearc-09 samba-4.1.16]# /opt/idb/utils/automateSambaJoin.sh qa.scalearc.net qa-ads.qa.scalearc.net phero 'SC!!wi22' qa.scalearc.net Users 10.10.0.110 1
+[DEBUG][scalearc-09] We have command : automateSambaJoin.sh qa.scalearc.net qa-ads.qa.scalearc.net phero WINAD_ADMIN_PASS qa.scalearc.net Users 1
+[DEBUG][scalearc-09] Trying to Setup /etc/krb5.conf : qa.scalearc.net
+[DEBUG][scalearc-09] Command : samba-tool domain join qa.scalearc.net DC -U phero --password=WINAD_ADMIN_PASS --realm=qa.scalearc.net
+[DEBUG][scalearc-09] Setup /etc/krb5.conf : [DONE]
+[DEBUG][scalearc-09] 
+[logging]
+ default = FILE:/var/log/krb5libs.log
+ kdc = FILE:/var/log/krb5kdc.log
+ admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+ default_realm = QA.SCALEARC.NET
+ dns_lookup_realm = true
+ dns_lookup_kdc = true
+
+[realms]
+ QA.SCALEARC.NET = {
+  kdc = qa-ads.qa.scalearc.net
+  admin_server = qa-ads.qa.scalearc.net
+ }
+
+[domain_realm]
+ .qa.scalearc.net = QA.SCALEARC.NET
+ qa.scalearc.net = QA.SCALEARC.NET
+Password for phero@QA.SCALEARC.NET: 
+[DEBUG][scalearc-09] We have command : automateSambaJoin.sh qa.scalearc.net qa-ads.qa.scalearc.net phero WINAD_ADMIN_PASS qa.scalearc.net Users 1
+[DEBUG][scalearc-09] Trying to join domain : qa.scalearc.net
+[DEBUG][scalearc-09] Command : kinit -X passwordfile=STDIN phero
+[DEBUG][scalearc-09] Domain qa.scalearc.net join status :  Sucess 
+[DEBUG][scalearc-09] Testing if ScaleArc was added as a host
+[DEBUG][scalearc-09] Command : host -t A scalearc-09.qa.scalearc.net
+[DEBUG][scalearc-09][PID :  28694 ] SAMBA status :  Sucess 
+[DEBUG][scalearc-09] Testing if ScaleArc was added as a host
+[DEBUG][scalearc-09] Command : host -t A scalearc-09.qa.scalearc.net
+[DEBUG][scalearc-09] Testing if ScaleArc was added as a host :  Sucess 
+[DEBUG][scalearc-09] Command : samba-tool drs kcc -U phero qa-ads.qa.scalearc.net --password=WINAD_ADMIN_PASS
+[DEBUG][scalearc-09] Command : samba-tool list group | grep Users 
+[DEBUG][scalearc-09] Testing Group Name exists :  Sucess 

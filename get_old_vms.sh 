@@ -1,0 +1,10 @@
+#!/bin/bash
+
+####################################
+## get shutdown vm shutdown date. ##
+## get_old_vms.sh                 ##
+####################################
+
+for i in `xe vm-list power-state=halted`
+	do
+	

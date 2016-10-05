@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <OOBE>
+                <NetworkLocation>Work</NetworkLocation>
+                <HideEULAPage>true</HideEULAPage>
+                <ProtectYourPC>1</ProtectYourPC>
+            </OOBE>
+            <Themes>
+                <DefaultThemesOff>true</DefaultThemesOff>
+            </Themes>
+            <UserAccounts>
+                <AdministratorPassword>
+                    <Value>UwBDACEAIQB3AGkAMgAyAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <PlainText>false</PlainText>
+                </AdministratorPassword>
+            </UserAccounts>
+            <VisualEffects>
+                <FontSmoothing>Off</FontSmoothing>
+            </VisualEffects>
+            <WindowsFeatures>
+                <ShowInternetExplorer>false</ShowInternetExplorer>
+                <ShowMediaCenter>false</ShowMediaCenter>
+                <ShowWindowsMail>false</ShowWindowsMail>
+                <ShowWindowsMediaPlayer>false</ShowWindowsMediaPlayer>
+            </WindowsFeatures>
+            <BluetoothTaskbarIconEnabled>false</BluetoothTaskbarIconEnabled>
+            <DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
+            <DoNotCleanTaskBar>true</DoNotCleanTaskBar>
+            <RegisteredOrganization>ScaleArc</RegisteredOrganization>
+            <RegisteredOwner>ScaleArc Operations</RegisteredOwner>
+            <ShowPowerButtonOnStartScreen>false</ShowPowerButtonOnStartScreen>
+            <ShowWindowsLive>true</ShowWindowsLive>
+            <TimeZone>Pacific Standard Time</TimeZone>
+        </component>
+    </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <ProductKey>N8WWB-XB2DF-7WTC8-QCQQ3-H2X8Y</ProductKey>
+            <RegisteredOrganization>ScaleArc</RegisteredOrganization>
+            <RegisteredOwner>ScaleArc Operations</RegisteredOwner>
+            <TimeZone>Pacific Standard Time</TimeZone>
+            <ShowPowerButtonOnStartScreen>false</ShowPowerButtonOnStartScreen>
+            <ShowWindowsLive>false</ShowWindowsLive>
+            <DoNotCleanTaskBar>false</DoNotCleanTaskBar>
+            <DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
+            <CopyProfile>true</CopyProfile>
+            <BluetoothTaskbarIconEnabled>false</BluetoothTaskbarIconEnabled>
+        </component>
+        <component name="Networking-MPSSVC-Svc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <PublicProfile_EnableFirewall>false</PublicProfile_EnableFirewall>
+            <DomainProfile_EnableFirewall>false</DomainProfile_EnableFirewall>
+            <PrivateProfile_EnableFirewall>false</PriavateProfile_EnableFirewall>
+        </component>
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+    </settings>
+    <cpi:offlineImage cpi:source="wim:c:/users/administrator/documents/install.wim#Windows Server 2012 R2 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+</unattend>
