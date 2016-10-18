@@ -1,0 +1,40 @@
+#MySQL config DBv5_PROD
+
+mysql root password
+5l0aRHZ6sAVt2SXz178y
+
+mysql replication user password
+o8C223uU8gKtfuG2u65R
+
+mysql scalearc user password
+AekC9g6v8AHZrP3d4P2c
+
+mysql dpprod user password
+v9hu2wzS43Jm5LR4n7hC
+
+DB
+dpdb_prod
+
+
+Node 1
+grant replication slave on *.* to 'replication'@10.133.223.91 identified by 'o8C223uU8gKtfuG2u65R';
+/sbin/iptables -A INPUT -p tcp -s  10.133.223.91 -j ACCEPT
+/sbin/iptables -A OUTPUT -p tcp -d  10.133.223.91 -j ACCEPT
+
+Node 2
+create user 'replicator'@'10.133.223.%' identified by 'o8C223uU8gKtfuG2u65R';
+slave stop; 
+CHANGE MASTER TO MASTER_HOST = '10.133.223.91', MASTER_USER = 'replicator', MASTER_PASSWORD = 'o8C223uU8gKtfuG2u65R', MASTER_LOG_FILE = 'mysqld-bin.000002', MASTER_LOG_POS = 678; 
+slave start; 
+
+grant replication slave on *.* to 'replication'@10.133.223.90 identified by 'o8C223uU8gKtfuG2u65R';
+
+
+/sbin/iptables -A INPUT -p tcp -s  10.133.223.90 -j ACCEPT
+/sbin/iptables -A OUTPUT -p tcp -d  10.133.223.90 -j ACCEPT
+
+
+create user 'scalearc'@'10.133.223.%' identified by 'AekC9g6v8AHZrP3d4P2c';
+grant all privileges ON *.* to 'scalearc'@'10.133.223.%' WITH GRANT OPTION;
+
+grant all privileges ON dpdb_prod.* to 'dpprod'@'10.133.223.%' identified by 'v9hu2wzS43Jm5LR4n7hC';
