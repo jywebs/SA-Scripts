@@ -38,3 +38,6 @@ create user 'scalearc'@'10.133.223.%' identified by 'AekC9g6v8AHZrP3d4P2c';
 grant all privileges ON *.* to 'scalearc'@'10.133.223.%' WITH GRANT OPTION;
 
 grant all privileges ON dpdb_prod.* to 'dpprod'@'10.133.223.%' identified by 'v9hu2wzS43Jm5LR4n7hC';
+
+10.133.223.95   dpv5prod01
+10.133.223.96   dpv5prod02
